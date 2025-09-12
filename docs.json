@@ -37,6 +37,14 @@
           "resources/error-codes",
           "resources/faq"
         ]
+      },
+      {
+        "group": "Support",
+        "pages": [
+          "support/policies",
+          "support/rate-limits",
+          "support/support"
+        ]
       }
     ]
   },
