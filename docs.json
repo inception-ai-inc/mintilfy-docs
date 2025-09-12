@@ -9,32 +9,36 @@
   },
   "favicon": "/favicon.asvg",
   "navigation": {
-      "groups": [
-        {
-          "group": "Getting Started",
-          "pages": [
-            "get-started/get-started",
-            "get-started/models"
-          ]
-        },
-        {
-          "group": "Writing content",
-          "pages": [
-            "essentials/markdown",
-            "essentials/code",
-            "essentials/images",
-            "essentials/reusable-snippets"
-          ]
-        },
-        {
-          "group": "AI tools",
-          "pages": [
-            "ai-tools/cursor",
-            "ai-tools/claude-code",
-            "ai-tools/windsurf"
-          ]
-        }
-      ]
+    "tab": "Guides",
+    "groups": [
+      {
+        "group": "Getting Started",
+        "pages": [
+          "get-started/get-started",
+          "get-started/models"
+        ]
+      },
+      {
+        "group": "Capabilities",
+        "pages": [
+          "capabilities/completions",
+          "capabilities/tool-use",
+          "capabilities/streaming",
+          "capabilities/structured-output",
+          "capabilities/fim",
+          "capabilities/next-edit"
+        ]
+      },
+      {
+        "group": "Resources",
+        "pages": [
+          "resources/integrations",
+          "ai-tools/claude-code",
+          "resources/error-codes",
+          "resources/faq"
+        ]
+      }
+    ]
   },
   "logo": {
     "light": "/logo/light.svg",
