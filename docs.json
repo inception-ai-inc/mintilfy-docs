@@ -33,7 +33,7 @@
         "group": "Resources",
         "pages": [
           "resources/integrations",
-          "ai-tools/claude-code",
+          "resources/chat",
           "resources/error-codes",
           "resources/faq"
         ]
