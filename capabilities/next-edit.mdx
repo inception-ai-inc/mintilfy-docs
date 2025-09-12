@@ -1,4 +1,105 @@
 ---
 title: "Next Edit"
-description: "Description of your new file."
+description: "Generate Next Edit completions using our coder model."
 ---
+
+```
+POST /v1/edit/completions
+
+{
+  "model": "mercury-coder",
+  "messages": [
+    {"role": "user", "content": "<|recently_viewed_code_snippets|>
+
+<|/recently_viewed_code_snippets|>
+
+<|current_file_content|>
+current_file_path: solver.py
+'''''''''
+function: flagAllNeighbors
+----------
+This function marks each of the covered neighbors of the cell at the given row
+<|code_to_edit|>
+and col as flagged.
+'''''''''
+def flagAllNeighbors(board<|cursor|>, row, col): 
+ for r, c in b.getNeighbors(row, col):
+ if b.isValid(r, c):
+ b.flag(r, c)
+
+<|/code_to_edit|>
+<|/current_file_content|>
+
+<|edit_diff_history|>
+--- /c:/Users/test/testing/solver.py
++++ /c:/Users/test/testing/solver.py
+@@ -6,1 +6,1 @@
+-def flagAllNeighbors(b, row, col): 
++def flagAllNeighbors(board, row, col): 
+
+<|/edit_diff_history|>"}
+  ]
+}
+```
+
+**Next Edit Request Format**
+
+Mercury Coder expects next-edit requests to contain 3 sections of code contents: recently viewed snippets, the current file with the editable region, and a time-ordered edit history. The primary purpose of the recently viewed snippets and edit history are to provide context to Mercury so that it can better understand the user's current intent in modifying code.
+
+<AccordionGroup>
+  <Accordion title="Recently Viewed Snippets">
+    The recently viewed snippets should be formatted as:
+
+    ```
+    <|recently_viewed_code_snippets|>
+    <|recently_viewed_code_snippet|>
+    code_snippet_file_path: [SNIPPET FILE PATH 1]
+    [SNIPPET 1 CODE]
+    <|/recently_viewed_code_snippet|>
+    
+    <|recently_viewed_code_snippet|>
+    code_snippet_file_path: [SNIPPET FILE PATH 2]
+    [SNIPPET 2 CODE]
+    <|/recently_viewed_code_snippet|>
+    <|/recently_viewed_code_snippets|>
+    ```
+
+    Each snippet should correspond to a piece of code (or entire code files) that a user has recently viewed. If you do not wish to use recently viewed snippets, please add `<|recently_viewed_code_snippets|>\n\n<|/recently_viewed_code_snippets|>` with no contents inside the tags.
+  </Accordion>
+  <Accordion title="Current File Content">
+    The current file content should be formatted as:
+
+    ```
+    <|current_file_content|>
+    current_file_path: [CURRENT FILE PATH]
+    [CODE ABOVE EDITABLE REGION]
+    <|code_to_edit|>
+    [EDITABLE REGION CODE]
+    <|/code_to_edit|>
+    [CODE BELOW EDITABLE REGION]
+    <|/current_file_content|>
+    ```
+
+    Mercury Coder will return an updated version of the editable region in its response (e.g., completing a function) enclosed in triple backticks.
+  </Accordion>
+  <Accordion title="Edit History">
+    The edit history should be formatted as:
+
+    ```
+    <|edit_diff_history|>
+    --- [EDITED FILE PATH 1]
+    +++ [EDITED FILE PATH 1]
+    [DIFF HUNK HEADER 1 WITH @@]
+    [DIFF LINES 1]
+    
+    --- [EDITED FILE PATH 2]
+    +++ [EDITED FILE PATH 2]
+    [DIFF HUNK HEADER 2 WITH @@]
+    [DIFF LINES 2]
+    
+    <|/edit_diff_history|>
+    ```
+
+    As seen above, each edit should follow unidiff formatting. It is important to make sure that the bottommost edits in the prompt correspond to the most recent edits made by the user. If you do not wish to use edit history, please add `<|edit_diff_history|>\n\n<|/edit_diff_history|>` with no contents inside the tags.
+  </Accordion>
+</AccordionGroup>

@@ -1,4 +1,14 @@
 ---
 title: "FIM"
-description: "Description of your new file."
+description: "Generate FIM completions using our coder model."
 ---
+
+```
+POST /v1/fim/completions
+
+{
+  "model": "mercury-coder",
+  "prompt": "def fibonacci(",
+  "suffix": "return a + b"
+}
+```

@@ -2,3 +2,78 @@
 title: "Streaming & Diffusion"
 description: "Description of your new file."
 ---
+
+Inception API supports real-time output and diffusion effect modes:
+
+- **Streaming:** Get responses block-by-block for real-time feedback—ideal for chat and live applications.
+- **Diffusing:** Optionally visualize how noisy outputs are refined into final text, showcasing the model's iterative denoising process.
+
+<CodeGroup>
+
+```bash Streaming
+curl https://api.inceptionlabs.ai/v1/chat/completions \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer INCEPTION_API_KEY" \
+    -d '{
+      "model": "mercury",
+      "messages": [
+        {"role": "user", "content": "What is a diffusion model?"}
+      ],
+      "max_tokens": 1000,
+      "stream": true
+    }'
+```
+
+
+```bash Diffusing
+curl https://api.inceptionlabs.ai/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer INCEPTION_API_KEY" \
+  -d '{
+    "model": "mercury",
+    "messages": [
+      {"role": "user", "content": "What is a diffusion model?"}
+    ],
+    "max_tokens": 1000,
+    "stream": true,
+    "diffusing": true
+  }'
+
+```
+
+</CodeGroup>
+
+Here is an example of how to show the diffusing effect in your web app using JavaScript.
+
+```javascript
+const reader = response.body.getReader();
+const decoder = new TextDecoder();
+let fullContent = '';
+while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    
+    const chunk = decoder.decode(value);
+    const lines = chunk.split('\n');
+    
+    for (const line of lines) {
+        const trimmed = line.trim();
+        if (!trimmed || !trimmed.startsWith('data: ')) continue;
+        if (trimmed === 'data: [DONE]') continue;
+        const jsonStr = trimmed.substring(6);
+        if (!jsonStr.startsWith('{')) continue;
+        try {
+            const data = JSON.parse(jsonStr);
+            
+            for (const choice of data.choices || []) {
+                if (choice.delta && choice.delta.content !== null && choice.delta.content !== undefined) {
+                    fullContent = choice.delta.content || '';
+                    contentElement.textContent = fullContent;
+                }
+            }
+        } catch (error) {
+            console.error('Parsing error:', error);
+        }
+    }
+}
+```

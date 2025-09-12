@@ -1,4 +1,14 @@
 ---
-title: "FAQ"
+title: "Frequently Asked Questions"
 description: "Description of your new file."
+sidebarTitle: "FAQ"
 ---
+
+<AccordionGroup>
+  <Accordion title="How do I handle rate limits?">
+    Implement exponential backoff in your client code. When you receive a rate limit error (429) or a server error (503), wait before retrying.
+  </Accordion>
+  <Accordion title="How are tokens counted?" defaultOpen>
+    Tokens are pieces of text that our models process. A token is roughly 4 characters for English text. Both input and output tokens count toward your usage limits.
+  </Accordion>
+</AccordionGroup>

@@ -1,4 +1,16 @@
 ---
 title: "Completions"
-description: "Description of your new file."
+description: "Generate conversational completions."
 ---
+
+```
+POST /v1/chat/completions
+
+{
+  "model": "mercury",
+  "messages": [
+    {"role": "system", "content": "You are a helpful assistant."},
+    {"role": "user", "content": "What is a diffusion model?"}
+  ],
+}
+```

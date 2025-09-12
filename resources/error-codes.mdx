@@ -2,3 +2,16 @@
 title: "Error Codes"
 description: "Description of your new file."
 ---
+
+#### **Response Format**
+
+Responses are returned in JSON format. Successful responses have a 2xx status code and contain the requested data. Error responses have a 4xx or 5xx status code and include error details.
+
+#### **Error Codes**
+
+| **Code**                             | **Solution**                                                         |
+| :----------------------------------- | :------------------------------------------------------------------- |
+| **401 - Incorrect API key provided** | **Verify API key, clear browser cache, or generate a new key.**      |
+| **429 - Rate limit reached**         | **Pace requests and implement exponential backoff.**                 |
+| **500 - Server error**               | **Retry after a brief wait; contact support if persistent.**         |
+| **503 - Engine overloaded**          | **Retry request after a brief wait; contact support if persistent.** |
