@@ -14,10 +14,10 @@
         "tab": "Guides",
         "groups": [
           {
-            "group": "Customization",
+            "group": "Getting Started",
             "pages": [
-              "essentials/settings",
-              "essentials/navigation"
+              "get-started/get-started",
+              "get-started/models"
             ]
           },
           {
@@ -59,7 +59,7 @@
           }
         ]
       }
-    ],
+    ]
   },
   "logo": {
     "light": "/logo/light.svg",
