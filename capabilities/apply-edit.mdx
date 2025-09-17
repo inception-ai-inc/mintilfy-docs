@@ -7,6 +7,8 @@ description: "Generate Apply Edit completions using our coder model."
 
 Mercury Coder expects apply-edit requests to contain 2 sections: the original code and an update snippet. The model will intelligently merge the update snippet into the original code while preserving the code's structure, order, comments, and indentation.
 
+**Original Code**
+
 The original code should be formatted as:
 
 ```
@@ -14,6 +16,8 @@ The original code should be formatted as:
 {original_code}
 <|/original_code|>
 ```
+
+**Update Snippet**
 
 The update snippet should be formatted as:
 
@@ -27,9 +31,9 @@ The update snippet should be formatted as:
 <|/update_snippet|>
 ```
 
-Here's the complete request.
+Here's the full request:
 
-```
+```bash
 POST /v1/apply/completions
 
 {

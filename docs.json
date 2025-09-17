@@ -26,7 +26,8 @@
           "capabilities/streaming",
           "capabilities/structured-output",
           "capabilities/fim",
-          "capabilities/next-edit"
+          "capabilities/next-edit",
+          "capabilities/apply-edit"
         ]
       },
       {
