@@ -1,0 +1,63 @@
+---
+title: "Apply Edit"
+description: "Generate Apply Edit completions using our coder model."
+---
+
+**Apply Edit Request Format**
+
+Mercury Coder expects apply-edit requests to contain 2 sections: the original code and an update snippet. The model will intelligently merge the update snippet into the original code while preserving the code's structure, order, comments, and indentation.
+
+The original code should be formatted as:
+
+```
+<|original_code|>
+{original_code}
+<|/original_code|>
+```
+
+The update snippet should be formatted as:
+
+```
+<|update_snippet|>
+// ... existing code ...
+[UPDATED CODE SNIPPET 1]
+// ... existing code ...
+[UPDATED CODE SNIPPET 2]
+// ... existing code ...
+<|/update_snippet|>
+```
+
+Here's the complete request.
+
+```
+POST /v1/apply/completions
+
+{
+  "model": "mercury-coder",
+  "messages": [
+    {
+      "role": "user",
+      "content": "<|original_code|>
+class Calculator:
+    """A simple calculator class."""
+    def __init__(self):
+        self.history = []
+
+    def add(self, a, b):
+        """Adds two numbers."""
+        result = a + b
+        return result
+<|/original_code|>
+
+<|update_snippet|>
+// ... existing code ...
+def multiply(self, a, b):
+    """Multiplies two numbers."""
+    result = a * b
+    return result
+// ... existing code ...
+<|/update_snippet|>"
+    }
+  ]
+}
+```
