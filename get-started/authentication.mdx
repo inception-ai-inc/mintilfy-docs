@@ -1,0 +1,22 @@
+---
+title: "Authentication"
+description: "Description of your new file."
+---
+
+All API requests require authentication using API keys. Your API keys carry many privileges, so be sure to keep them secure.
+
+#### **Obtaining API Keys**
+
+You can generate API keys from your [Inception Platform Dashboard](https://platform.inceptionlabs.ai/dashboard/api-keys).
+
+#### **Using API Keys**
+
+Include your API key in the Authorization header:
+
+```
+Authorization: Bearer INCEPTION_API_KEY
+```
+
+<Warning>
+  **Security Note:** Never expose your API keys in client-side code or commit them to version control. Use environment variables or a secure secrets management system.
+</Warning>

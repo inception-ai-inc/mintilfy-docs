@@ -15,6 +15,7 @@
         "group": "Getting Started",
         "pages": [
           "get-started/get-started",
+          "get-started/authentication",
           "get-started/models"
         ]
       },
