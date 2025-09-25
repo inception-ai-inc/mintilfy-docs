@@ -10,16 +10,16 @@ title: "Models, Endpoints, and Pricing"
 
 ## Production Models
 
-| Model             | Input Price (1M Tokens) | Output Price (1M Tokens) | Supported Endpoints                                                                     | Context Window | Features                           |
-| ----------------- | ----------------------- | :----------------------- | --------------------------------------------------------------------------------------- | -------------- | ---------------------------------- |
-| **Mercury**       | \$0.25                  | \$1.00                   | `v1/chat/completions`                                                                   | 128K           | `Tool Calling` `Structured Output` |
-| **Mercury Coder** | \$0.25                  | \$1.00                   | `v1/chat/completions` `v1/fim/completions` `v1/apply/completions` `v1/edit/completions` | 128K           | `Tool Calling` `Structured Output` |
+| Model             | Input Price (1M Tokens) | Output Price (1M Tokens) | Supported Endpoints                                                                     | Context Window | Features                           | Supported Formats |
+| ----------------- | ----------------------- | :----------------------- | --------------------------------------------------------------------------------------- | -------------- | ---------------------------------- | ----------------- |
+| **Mercury**       | \$0.25                  | \$1.00                   | `v1/chat/completions`                                                                   | 128K           | `Tool Calling` `Structured Output` | `Text`            |
+| **Mercury Coder** | \$0.25                  | \$1.00                   | `v1/chat/completions` `v1/fim/completions` `v1/apply/completions` `v1/edit/completions` | 128K           | `Tool Calling` `Structured Output` | `Text`            |
 
 ## API Specs
 
 <Tabs>
   <Tab title="Mercury">
-    Generalist Model for most chat applications.
+    Generalist model
 
     <ParamField path="max_tokens" default="8192" type="number">
       Maximum number of tokens to generate. Range: 1–16384
