@@ -2,11 +2,204 @@
 title: "Models, Endpoints, and Pricing"
 ---
 
-| Model         | Input Price        | Output Price       |
-| ------------- | ------------------ | ------------------ |
-| Mercury       | \$0.25 / 1M tokens | \$1.00 / 1M tokens |
-| Mercury Coder | \$0.25 / 1M tokens | \$1.00 / 1M tokens |
+## Production Models
 
-<Tip>
-  TODO: CREATE THIS [use custom code?]
-</Tip>
+| Model             | Input Price        | Output Price       | Supported Endpoints                                                         | Context Window | Features                           |
+| ----------------- | ------------------ | :----------------- | --------------------------------------------------------------------------- | -------------- | ---------------------------------- |
+| **Mercury**       | \$0.25 / 1M tokens | \$1.00 / 1M tokens | `chat/completions`                                                          | 128K           | `Tool Calling` `Structured Output` |
+| **Mercury Coder** | \$0.25 / 1M tokens | \$1.00 / 1M tokens | `chat/completions` `fim/completions` `apply/completions` `edit/completions` | 128K           | `Tool Calling` `Structured Output` |
+
+## API Specs
+
+<Tabs>
+  <Tab title="Mercury">
+    Generalist Model for most chat applications.
+
+    <ParamField path="max_tokens" default="8192" type="number">
+      Maximum number of tokens to generate. Range: 1–16384
+    </ParamField>
+    <ParamField path="frequency_penalty" default="0.0" type="number">
+      Penalizes new tokens based on their frequency in the generated text so far. Range: -2.0-2.0
+    </ParamField>
+    <ParamField path="presence_penalty" default="1.5" type="number">
+      Penalizes new tokens based on whether they appear in the generated text so far. Range: -2.0-2.0
+    </ParamField>
+    <ParamField path="temperature" default="0.0" type="number">
+      Controls randomness. Range: 0.0-0.7
+    </ParamField>
+    <ParamField path="top_p" default="1.0" type="number">
+      Controls the cumulative probability of the top tokens to consider. Range: 0.0–1.0
+    </ParamField>
+    <ParamField path="top_k" default="null" type="number">
+      Controls the number of top tokens to consider. Range: 1–1000
+    </ParamField>
+    <ParamField path="stop" default="null" type="string[]">
+      Up to 4 sequences where the model will stop generating further tokens. The returned text will not contain these sequences.
+    </ParamField>
+    <ParamField path="stream" default="false" type="boolean">
+      Whether to stream the response.
+    </ParamField>
+    <ParamField path="stream_options" default="null" type="object">
+      Include include_usage=true to get usage information.
+    </ParamField>
+    <ParamField path="diffusing" default="false" type="boolean">
+      Streaming should be set to true for diffusing effect.
+    </ParamField>
+    <ParamField path="tools" default="null" type="object[]">
+      A list of tools the model may call.
+    </ParamField>
+    ### Example Usage
+
+    <RequestExample>
+
+    ```bash cURL
+    curl https://api.inceptionlabs.ai/v1/chat/completions \
+      -H "Content-Type: application/json" \
+      -H "Authorization: Bearer INCEPTION_API_KEY" \
+      -d '{
+        "model": "mercury",
+        "messages": [
+          {"role": "user", "content": "Hello! What is a diffusion model?"}
+        ],
+        "max_tokens": 1000
+      }'
+    ```
+
+    
+    ```javascript JavaScript
+    // Using fetch API
+    const response = await fetch('https://api.inceptionlabs.ai/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer INCEPTION_API_KEY'
+      },
+      body: JSON.stringify({
+        model: "mercury",
+        messages: [
+          { role: 'user', content: 'Hello! What is a diffusion model?' }
+        ],
+        max_tokens: 1000
+      })
+    });
+    
+    const data = await response.json();
+    console.log(data.choices[0].message.content);
+    ```
+
+    
+    ```python Python
+    import requests
+    
+    response = requests.post('https://api.inceptionlabs.ai/v1/chat/completions', headers={
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer INCEPTION_API_KEY'
+    }, json={
+        "model": "mercury",
+        "messages": [
+            {"role": "user", "content": "Hello! What is a diffusion model?"}
+        ],
+        "max_tokens": 1000
+    })
+    
+    print(response.json()['choices'][0]['message']['content'])
+    ```
+
+    </RequestExample>
+  </Tab>
+  <Tab title="Mercury Coder">
+    Coding specialist model
+
+    <ParamField path="max_tokens" default="8192" type="number">
+      Maximum number of tokens to generate. Range: 1–16384
+    </ParamField>
+    <ParamField path="frequency_penalty" default="0.0" type="number">
+      Penalizes new tokens based on their frequency in the generated text so far. Range: -2.0-2.0
+    </ParamField>
+    <ParamField path="presence_penalty" default="1.5" type="number">
+      Penalizes new tokens based on whether they appear in the generated text so far. Range: -2.0-2.0
+    </ParamField>
+    <ParamField path="temperature" default="0.0" type="number">
+      Controls randomness. Range: 0.0-0.7
+    </ParamField>
+    <ParamField path="top_p" default="1.0" type="number">
+      Controls the cumulative probability of the top tokens to consider. Range: 0.0–1.0
+    </ParamField>
+    <ParamField path="top_k" default="null" type="number">
+      Controls the number of top tokens to consider. Range: 1–1000
+    </ParamField>
+    <ParamField path="stop" default="null" type="string[]">
+      Up to 4 sequences where the model will stop generating further tokens. The returned text will not contain these sequences.
+    </ParamField>
+    <ParamField path="stream" default="false" type="boolean">
+      Whether to stream the response.
+    </ParamField>
+    <ParamField path="stream_options" default="null" type="object">
+      Include include_usage=true to get usage information.
+    </ParamField>
+    <ParamField path="diffusing" default="false" type="boolean">
+      Streaming should be set to true for diffusing effect.
+    </ParamField>
+    <ParamField path="tools" default="null" type="object[]">
+      A list of tools the model may call.
+    </ParamField>
+    ### Example Usage
+
+    <RequestExample>
+
+    ```bash cURL
+    curl https://api.inceptionlabs.ai/v1/chat/completions \
+      -H "Content-Type: application/json" \
+      -H "Authorization: Bearer INCEPTION_API_KEY" \
+      -d '{
+        "model": "mercury-coder",
+        "messages": [
+          {"role": "user", "content": "Hello! What is 1+1?"}
+        ],
+        "max_tokens": 1000
+      }'
+    ```
+
+    
+    ```javascript JavaScript
+    // Using fetch API
+    const response = await fetch('https://api.inceptionlabs.ai/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer INCEPTION_API_KEY'
+      },
+      body: JSON.stringify({
+        model: "mercury-coder",
+        messages: [
+          { role: 'user', content: 'Hello! What is 1+1?' }
+        ],
+        max_tokens: 1000
+      })
+    });
+    
+    const data = await response.json();
+    console.log(data.choices[0].message.content);
+    ```
+
+    
+    ```python Python
+    import requests
+    
+    response = requests.post('https://api.inceptionlabs.ai/v1/chat/completions', headers={
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer INCEPTION_API_KEY'
+    }, json={
+        "model": "mercury-coder",
+        "messages": [
+            {"role": "user", "content": "Hello! What is 1+1?"}
+        ],
+        "max_tokens": 1000
+    })
+    
+    print(response.json()['choices'][0]['message']['content'])
+    ```
+
+    </RequestExample>
+  </Tab>
+</Tabs>
