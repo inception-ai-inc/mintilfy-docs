@@ -32,9 +32,9 @@
       },
       {
         "group": "Resources",
-        "dropdowns": [
+        "pages": [
           {
-            "dropdown": "Integrations",
+            "group": "Integrations",
             "icon": "book-open",
             "pages": [
               "resources/continue",
@@ -42,9 +42,7 @@
               "resources/roo-code",
               "resources/langchain"
             ]
-          }
-        ],
-        "pages": [
+          },
           "resources/chat",
           "resources/error-codes",
           "resources/faq"
