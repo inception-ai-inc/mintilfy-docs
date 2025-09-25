@@ -38,7 +38,8 @@
             "dropdown": "Integrations",
             "icon": "book-open",
             "pages": [
-              "resources/integrations"
+              "resources/continue",
+              "resources/cline"
             ]
           }
         ],
