@@ -1,6 +1,6 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "willow",
+  "theme": "maple",
   "name": "Inception Platform",
   "colors": {
     "primary": "#2C9AF2",
@@ -24,7 +24,7 @@
           "capabilities/completions",
           "capabilities/tool-use",
           "capabilities/streaming",
-          "capabilities/structured-output",
+          "capabilities/structured-outputs",
           "capabilities/fim",
           "capabilities/next-edit",
           "capabilities/apply-edit"
