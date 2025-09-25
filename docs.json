@@ -39,7 +39,9 @@
             "icon": "book-open",
             "pages": [
               "resources/continue",
-              "resources/cline"
+              "resources/cline",
+              "resources/roo-code",
+              "resources/langchain"
             ]
           }
         ],

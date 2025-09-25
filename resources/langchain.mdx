@@ -1,0 +1,27 @@
+---
+title: "LangChain"
+---
+
+### **Setup Instructions**
+
+1. Install langchain and langchain-openai in your Python environment via `pip install -qU langchain-openai`
+2. [Optional] Set an environment variable `INCEPTION_API_KEY` to your API key.
+3. The following code shows how you can interact with our model in LangChain.
+
+### **Code**
+
+```python
+import os
+from langchain_openai import ChatOpenAI
+api_key = os.environ["INCEPTION_API_KEY"] # Note: if you have not set this environment variable, hardcode your API key here.
+llm = ChatOpenAI(
+    model="mercury-coder",
+    temperature=0,
+    api_key=api_key,
+    base_url="https://api.inceptionlabs.ai/v1"
+)
+response = llm.invoke([("user", "What is a diffusion model?")]).content
+print(response)
+```
+
+[Documentation](https://python.langchain.com/docs/introduction/)
