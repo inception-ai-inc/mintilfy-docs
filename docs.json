@@ -4,8 +4,8 @@
   "name": "Inception Platform",
   "colors": {
     "primary": "#2C9AF2",
-    "light": "#00345C",
-    "dark": "#2C9AF2"
+    "light": "#2C9AF2",
+    "dark": "#00345C"
   },
   "favicon": "/favicon.asvg",
   "navigation": {
