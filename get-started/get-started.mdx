@@ -9,7 +9,7 @@ sidebarTitle: "Quick Start"
 1. Create an Inception Platform account or [sign in](https://platform.inceptionlabs.ai/auth/login) directly if you already have one.
 
    ✨ Each new user is initially assigned **10 million free tokens** to help get started with the API.
-2. Go to [API Keys](https://platform.inceptionlabs.ai/dashboard/api-keys) and create a new API key. You can start using the API immediately with your free tokens\!
+2. Go to [API Keys](https://platform.inceptionlabs.ai/dashboard/api-keys) and create a new API key. You can start using the API immediately with your free tokens!
 3. When your free tokens are running low, navigate to [Billing](https://platform.inceptionlabs.ai/dashboard/billing) to add your payment information for continued usage beyond the free tier.
 
 ## Quick Start
@@ -92,22 +92,20 @@ const data = await response.json();
 
 
 ```TypeScript TypeScript
-// Using fetch API
-const response = await fetch('https://api.inceptionlabs.ai/v1/chat/completions', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-    'Authorization': 'Bearer INCEPTION_API_KEY'
-  },
-  body: JSON.stringify({
-    model: 'mercury',
-    messages: [
-      { role: 'user', content: 'What is a diffusion model?' }
-    ],
-    max_tokens: 1000
-  })
+import OpenAI from 'openai';
+
+const openai = new OpenAI({
+  apiKey: 'INCEPTION_API_KEY',
+  baseURL: 'https://api.inceptionlabs.ai/v1'
 });
-const data = await response.json();
+
+const response = await openai.chat.completions.create({
+  model: 'mercury',
+  messages: [
+    { role: 'user', content: 'What is a diffusion model?' }
+  ],
+  max_tokens: 1000
+});
 ```
 
 </CodeGroup>
