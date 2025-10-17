@@ -15,7 +15,8 @@
         "pages": [
           "get-started/get-started",
           "get-started/authentication",
-          "get-started/models"
+          "get-started/models",
+          "get-started/rate-limits"
         ]
       },
       {
@@ -51,7 +52,6 @@
       {
         "group": "Support",
         "pages": [
-          "support/rate-limits",
           "support/support",
           "support/tou",
           "support/privacy"
