@@ -43,8 +43,8 @@
             "pages": [
               "resources/continue",
               "resources/cline",
-              "resources/roo-code",
-              "resources/langchain"
+              "resources/langchain",
+              "resources/roo-code"
             ]
           },
           "resources/chat",
