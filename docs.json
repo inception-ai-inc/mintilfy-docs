@@ -25,7 +25,7 @@
       {
         "group": "Capabilities",
         "pages": [
-          "capabilities/completions",
+          "capabilities/chat-completions",
           "capabilities/tool-use",
           "capabilities/streaming",
           "capabilities/structured-outputs",
