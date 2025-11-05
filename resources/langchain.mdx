@@ -15,8 +15,8 @@ import os
 from langchain_openai import ChatOpenAI
 api_key = os.environ["INCEPTION_API_KEY"] # Note: if you have not set this environment variable, hardcode your API key here.
 llm = ChatOpenAI(
-    model="mercury-coder",
-    temperature=0,
+    model="mercury",
+    temperature=0.75,
     api_key=api_key,
     base_url="https://api.inceptionlabs.ai/v1"
 )

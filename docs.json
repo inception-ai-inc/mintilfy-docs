@@ -44,7 +44,8 @@
               "resources/continue",
               "resources/cline",
               "resources/langchain",
-              "resources/roo-code"
+              "resources/roo-code",
+              "resources/kilo-code"
             ]
           },
           "resources/chat",
