@@ -86,5 +86,11 @@
       "linkedin": "https://www.linkedin.com/company/inception-labs-ai",
       "discord": "https://discord.com/invite/btzTARamwH"
     }
-  }
+  },
+  "contextual": {
+   "options": [
+     "copy",
+     "view"
+   ]
+ }
 }
