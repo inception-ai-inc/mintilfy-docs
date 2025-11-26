@@ -28,6 +28,7 @@
           "capabilities/chat-completions",
           "capabilities/tool-use",
           "capabilities/streaming",
+          "capabilities/realtime",
           "capabilities/structured-outputs",
           "capabilities/fim",
           "capabilities/next-edit",
