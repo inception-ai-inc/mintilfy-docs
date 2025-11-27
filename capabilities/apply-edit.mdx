@@ -3,12 +3,28 @@ title: "Apply Edit"
 description: "Generate Apply Edit completions using our coder model."
 ---
 
+```bash
+curl https://api.inceptionlabs.ai/v1/apply/completions \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer INCEPTION_API_KEY" \
+  -d '{
+    "model": "mercury-coder",
+    "messages": [
+      {
+        "role": "user",
+        "content": "<|original_code|>\nclass Calculator:\n    \"\"\"A simple calculator class.\"\"\"\n    def __init__(self):\n        self.history = []\n\n    def add(self, a, b):\n        \"\"\"Adds two numbers.\"\"\"\n        result = a + b\n        return result\n<|/original_code|>\n\n<|update_snippet|>\n// ... existing code ...\ndef multiply(self, a, b):\n    \"\"\"Multiplies two numbers.\"\"\"\n    result = a * b\n    return result\n// ... existing code ...\n<|/update_snippet|>"
+      }
+    ]
+  }'
+```
+
 **Apply Edit Request Format**
 
 Mercury Coder expects apply-edit requests to contain 2 sections: the original code and an update snippet. The model will intelligently merge the update snippet into the original code while preserving the code's structure, order, comments, and indentation.
 
-**Original Code**
 
+<AccordionGroup>
+  <Accordion title="Original Code">
 The original code should be formatted as:
 
 ```
@@ -16,9 +32,8 @@ The original code should be formatted as:
 {original_code}
 <|/original_code|>
 ```
-
-**Update Snippet**
-
+  </Accordion>
+  <Accordion title="Update Snippet">
 The update snippet should be formatted as:
 
 ```
@@ -30,38 +45,5 @@ The update snippet should be formatted as:
 // ... existing code ...
 <|/update_snippet|>
 ```
-
-Here's the full request:
-
-```bash
-POST /v1/apply/completions
-
-{
-  "model": "mercury-coder",
-  "messages": [
-    {
-      "role": "user",
-      "content": "<|original_code|>
-class Calculator:
-    """A simple calculator class."""
-    def __init__(self):
-        self.history = []
-
-    def add(self, a, b):
-        """Adds two numbers."""
-        result = a + b
-        return result
-<|/original_code|>
-
-<|update_snippet|>
-// ... existing code ...
-def multiply(self, a, b):
-    """Multiplies two numbers."""
-    result = a * b
-    return result
-// ... existing code ...
-<|/update_snippet|>"
-    }
-  ]
-}
-```
+  </Accordion>
+</AccordionGroup>

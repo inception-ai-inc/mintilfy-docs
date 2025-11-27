@@ -1,5 +1,6 @@
 ---
 title: "Models, Endpoints, and Pricing"
+mode: "wide"
 ---
 
 <Card title="Start Free with 10M Tokens" icon="sparkles">
@@ -48,6 +49,9 @@ title: "Models, Endpoints, and Pricing"
     <ParamField path="stream_options" default="null" type="object">
       Include include_usage=true to get usage information.
     </ParamField>
+    <ParamField path="realtime" default="false" type="boolean">
+      Whether to provide a realtime, instant response.
+    </ParamField>
     <ParamField path="diffusing" default="false" type="boolean">
       Streaming should be set to true for diffusing effect.
     </ParamField>
@@ -76,6 +80,24 @@ title: "Models, Endpoints, and Pricing"
     ```
 
     
+    ```python Python
+    import requests
+    
+    response = requests.post('https://api.inceptionlabs.ai/v1/chat/completions', headers={
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer INCEPTION_API_KEY'
+    }, json={
+        "model": "mercury",
+        "messages": [
+            {"role": "user", "content": "Hello! What is a diffusion model?"}
+        ],
+        "max_tokens": 1000
+    })
+    
+    print(response.json()['choices'][0]['message']['content'])
+    ```
+
+    
     ```javascript JavaScript
     // Using fetch API
     const response = await fetch('https://api.inceptionlabs.ai/v1/chat/completions', {
@@ -95,24 +117,6 @@ title: "Models, Endpoints, and Pricing"
     
     const data = await response.json();
     console.log(data.choices[0].message.content);
-    ```
-
-    
-    ```python Python
-    import requests
-    
-    response = requests.post('https://api.inceptionlabs.ai/v1/chat/completions', headers={
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer INCEPTION_API_KEY'
-    }, json={
-        "model": "mercury",
-        "messages": [
-            {"role": "user", "content": "Hello! What is a diffusion model?"}
-        ],
-        "max_tokens": 1000
-    })
-    
-    print(response.json()['choices'][0]['message']['content'])
     ```
 
     </CodeGroup>
@@ -175,6 +179,24 @@ title: "Models, Endpoints, and Pricing"
     ```
 
     
+    ```python Python
+    import requests
+    
+    response = requests.post('https://api.inceptionlabs.ai/v1/chat/completions', headers={
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer INCEPTION_API_KEY'
+    }, json={
+        "model": "mercury-coder",
+        "messages": [
+            {"role": "user", "content": "Hello! What is a diffusion model?"}
+        ],
+        "max_tokens": 1000
+    })
+    
+    print(response.json()['choices'][0]['message']['content'])
+    ```
+
+    
     ```javascript JavaScript
     // Using fetch API
     const response = await fetch('https://api.inceptionlabs.ai/v1/chat/completions', {
@@ -194,24 +216,6 @@ title: "Models, Endpoints, and Pricing"
     
     const data = await response.json();
     console.log(data.choices[0].message.content);
-    ```
-
-    
-    ```python Python
-    import requests
-    
-    response = requests.post('https://api.inceptionlabs.ai/v1/chat/completions', headers={
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer INCEPTION_API_KEY'
-    }, json={
-        "model": "mercury-coder",
-        "messages": [
-            {"role": "user", "content": "Hello! What is a diffusion model?"}
-        ],
-        "max_tokens": 1000
-    })
-    
-    print(response.json()['choices'][0]['message']['content'])
     ```
 
     </CodeGroup>
@@ -235,6 +239,23 @@ title: "Models, Endpoints, and Pricing"
     ```
 
     
+    ```python Python
+    import requests
+    
+    response = requests.post('https://api.inceptionlabs.ai/v1/fim/completions', headers={
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer INCEPTION_API_KEY'
+    }, json={
+        "model": "mercury-coder",
+        "prompt": "def fibonacci(",
+        "suffix": "return a + b",
+        "max_tokens": 1000
+    })
+    
+    print(response.json()['choices'][0]['text'])
+    ```
+
+    
     ```javascript JavaScript
     // Using fetch API
     const response = await fetch('https://api.inceptionlabs.ai/v1/fim/completions', {
@@ -253,23 +274,6 @@ title: "Models, Endpoints, and Pricing"
     
     const data = await response.json();
     console.log(data.choices[0].text);
-    ```
-
-    
-    ```python Python
-    import requests
-    
-    response = requests.post('https://api.inceptionlabs.ai/v1/fim/completions', headers={
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer INCEPTION_API_KEY'
-    }, json={
-        "model": "mercury-coder",
-        "prompt": "def fibonacci(",
-        "suffix": "return a + b",
-        "max_tokens": 1000
-    })
-    
-    print(response.json()['choices'][0]['text'])
     ```
 
     </CodeGroup>
@@ -296,6 +300,24 @@ title: "Models, Endpoints, and Pricing"
     ```
 
     
+    ```python Python
+    import requests
+    
+    response = requests.post('https://api.inceptionlabs.ai/v1/apply/completions', headers={
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer INCEPTION_API_KEY'
+    }, json={
+        "model": "mercury-coder",
+        "messages": [
+            {"role": "user", "content": "<|original_code|>\nclass Calculator:\n    \"\"\"A simple calculator class.\"\"\"\n    def __init__(self):\n        self.history = []\n\n    def add(self, a, b):\n        \"\"\"Adds two numbers.\"\"\"\n        result = a + b\n        return result\n<|/original_code|>\n\n<|update_snippet|>\n// ... existing code ...\ndef multiply(self, a, b):\n    \"\"\"Multiplies two numbers.\"\"\"\n    result = a * b\n    return result\n// ... existing code ...\n<|/update_snippet|>"}
+        ],
+        "max_tokens": 1000
+    })
+    
+    print(response.json()['choices'][0]['message']['content'])
+    ```
+
+    
     ```javascript JavaScript
     // Using fetch API
     const response = await fetch('https://api.inceptionlabs.ai/v1/apply/completions', {
@@ -315,24 +337,6 @@ title: "Models, Endpoints, and Pricing"
     
     const data = await response.json();
     console.log(data.choices[0].message.content);
-    ```
-
-    
-    ```python Python
-    import requests
-    
-    response = requests.post('https://api.inceptionlabs.ai/v1/apply/completions', headers={
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer INCEPTION_API_KEY'
-    }, json={
-        "model": "mercury-coder",
-        "messages": [
-            {"role": "user", "content": "<|original_code|>\nclass Calculator:\n    \"\"\"A simple calculator class.\"\"\"\n    def __init__(self):\n        self.history = []\n\n    def add(self, a, b):\n        \"\"\"Adds two numbers.\"\"\"\n        result = a + b\n        return result\n<|/original_code|>\n\n<|update_snippet|>\n// ... existing code ...\ndef multiply(self, a, b):\n    \"\"\"Multiplies two numbers.\"\"\"\n    result = a * b\n    return result\n// ... existing code ...\n<|/update_snippet|>"}
-        ],
-        "max_tokens": 1000
-    })
-    
-    print(response.json()['choices'][0]['message']['content'])
     ```
 
     </CodeGroup>
@@ -359,6 +363,24 @@ title: "Models, Endpoints, and Pricing"
     ```
 
     
+    ```python Python
+    import requests
+    
+    response = requests.post('https://api.inceptionlabs.ai/v1/edit/completions', headers={
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer INCEPTION_API_KEY'
+    }, json={
+        "model": "mercury-coder",
+        "messages": [
+            {"role": "user", "content": "<|recently_viewed_code_snippets|>\n\n<|/recently_viewed_code_snippets|>\n\n<|current_file_content|>\ncurrent_file_path: solver.py\n'''\nfunction: flagAllNeighbors\n----------\nThis function marks each of the covered neighbors of the cell at the given row\n<|code_to_edit|>\nand col as flagged.\n'''\ndef flagAllNeighbors(board<|cursor|>, row, col): \n for r, c in b.getNeighbors(row, col):\n if b.isValid(r, c):\n b.flag(r, c)\n\n<|/code_to_edit|>\n<|/current_file_content|>\n\n<|edit_diff_history|>\n--- /c:/Users/test/testing/solver.py\n+++ /c:/Users/test/testing/solver.py\n@@ -6,1 +6,1 @@\n-def flagAllNeighbors(b, row, col): \n+def flagAllNeighbors(board, row, col): \n\n<|/edit_diff_history|>"}
+        ],
+        "max_tokens": 1000
+    })
+    
+    print(response.json()['choices'][0]['text'])
+    ```
+
+    
     ```javascript JavaScript
     // Using fetch API
     const response = await fetch('https://api.inceptionlabs.ai/v1/edit/completions', {
@@ -378,24 +400,6 @@ title: "Models, Endpoints, and Pricing"
     
     const data = await response.json();
     console.log(data.choices[0].text);
-    ```
-
-    
-    ```python Python
-    import requests
-    
-    response = requests.post('https://api.inceptionlabs.ai/v1/edit/completions', headers={
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer INCEPTION_API_KEY'
-    }, json={
-        "model": "mercury-coder",
-        "messages": [
-            {"role": "user", "content": "<|recently_viewed_code_snippets|>\n\n<|/recently_viewed_code_snippets|>\n\n<|current_file_content|>\ncurrent_file_path: solver.py\n'''\nfunction: flagAllNeighbors\n----------\nThis function marks each of the covered neighbors of the cell at the given row\n<|code_to_edit|>\nand col as flagged.\n'''\ndef flagAllNeighbors(board<|cursor|>, row, col): \n for r, c in b.getNeighbors(row, col):\n if b.isValid(r, c):\n b.flag(r, c)\n\n<|/code_to_edit|>\n<|/current_file_content|>\n\n<|edit_diff_history|>\n--- /c:/Users/test/testing/solver.py\n+++ /c:/Users/test/testing/solver.py\n@@ -6,1 +6,1 @@\n-def flagAllNeighbors(b, row, col): \n+def flagAllNeighbors(board, row, col): \n\n<|/edit_diff_history|>"}
-        ],
-        "max_tokens": 1000
-    })
-    
-    print(response.json()['choices'][0]['text'])
     ```
 
     </CodeGroup>

@@ -1,7 +1,15 @@
 ---
-title: "Chat Completions"
-description: "Generate conversational chat completions."
+title: "Realtime"
 ---
+
+Inception API supports a Realtime mode that enables near-instant responses from Mercury.
+
+This is ideal for:
+
+- Voice assistants
+- Customer support chatbots
+- Real-time decision systems
+- Low-latency workflows and automations
 
 ```bash
 curl https://api.inceptionlabs.ai/v1/chat/completions \
@@ -12,6 +20,7 @@ curl https://api.inceptionlabs.ai/v1/chat/completions \
     "messages": [
       { "role": "system", "content": "You are a helpful assistant." },
       { "role": "user", "content": "What is a diffusion model?" }
-    ]
+    ],
+    "realtime": true
   }'
 ```

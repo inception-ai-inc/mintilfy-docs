@@ -2,9 +2,9 @@
 title: "Streaming & Diffusion"
 ---
 
-Inception API supports real-time output and diffusion effect modes:
+Inception API supports streaming output and diffusion effect modes:
 
-- **Streaming:** Get responses block-by-block for real-time feedback—ideal for chat and live applications.
+- **Streaming:** Get responses block-by-block for instant feedback—ideal for chat and live applications.
 - **Diffusing:** Optionally visualize how noisy outputs are refined into final text, showcasing the model's iterative denoising process.
 
 <CodeGroup>
@@ -41,7 +41,7 @@ curl https://api.inceptionlabs.ai/v1/chat/completions \
 
 </CodeGroup>
 
-Here is an example of how to show the diffusing effect in your web app using JavaScript.
+Here is an example of how to show the diffusing effect in your web app using JavaScript:
 
 ```javascript
 const reader = response.body.getReader();

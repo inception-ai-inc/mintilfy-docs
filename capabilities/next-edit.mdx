@@ -4,42 +4,18 @@ description: "Generate Next Edit completions using our coder model."
 ---
 
 ```bash
-POST /v1/edit/completions
-
-{
-  "model": "mercury-coder",
-  "messages": [
-    {"role": "user", "content": "<|recently_viewed_code_snippets|>
-
-<|/recently_viewed_code_snippets|>
-
-<|current_file_content|>
-current_file_path: solver.py
-'''''''''
-function: flagAllNeighbors
-----------
-This function marks each of the covered neighbors of the cell at the given row
-<|code_to_edit|>
-and col as flagged.
-'''''''''
-def flagAllNeighbors(board<|cursor|>, row, col): 
- for r, c in b.getNeighbors(row, col):
- if b.isValid(r, c):
- b.flag(r, c)
-
-<|/code_to_edit|>
-<|/current_file_content|>
-
-<|edit_diff_history|>
---- /c:/Users/test/testing/solver.py
-+++ /c:/Users/test/testing/solver.py
-@@ -6,1 +6,1 @@
--def flagAllNeighbors(b, row, col): 
-+def flagAllNeighbors(board, row, col): 
-
-<|/edit_diff_history|>"}
-  ]
-}
+curl https://api.inceptionlabs.ai/v1/edit/completions \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer INCEPTION_API_KEY" \
+  -d "{
+    \"model\": \"mercury-coder\",
+    \"messages\": [
+      {
+        \"role\": \"user\",
+        \"content\": \"<|recently_viewed_code_snippets|>\\n\\n<|/recently_viewed_code_snippets|>\\n\\n<|current_file_content|>\\ncurrent_file_path: solver.py\\n'''''''''\\nfunction: flagAllNeighbors\\n----------\\nThis function marks each of the covered neighbors of the cell at the given row\\n<|code_to_edit|>\\nand col as flagged.\\n'''''''''\\ndef flagAllNeighbors(board<|cursor|>, row, col): \\n for r, c in b.getNeighbors(row, col):\\n if b.isValid(r, c):\\n b.flag(r, c)\\n\\n<|/code_to_edit|>\\n<|/current_file_content|>\\n\\n<|edit_diff_history|>\\n--- /c:/Users/test/testing/solver.py\\n+++ /c:/Users/test/testing/solver.py\\n@@ -6,1 +6,1 @@\\n-def flagAllNeighbors(b, row, col): \\n+def flagAllNeighbors(board, row, col): \\n\\n<|/edit_diff_history|>\"
+      }
+    ]
+  }"
 ```
 
 **Next Edit Request Format**

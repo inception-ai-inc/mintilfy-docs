@@ -3,93 +3,58 @@ title: "Structured Outputs"
 description: "Inception API supports structured outputs to ensure responses follow specific formats."
 ---
 
-### Available Formats
+Use JSON schemas to enforce structured data output with specific properties, types, and constraints.
 
-- **JSON:** Use JSON schemas to enforce structured data output with specific properties, types, and constraints.
-- **Choice:** Present multiple options to choose from.
-- **Regex:** Constrain outputs to match specific regular expression patterns.
-
-<CodeGroup>
-
-```python JSON
-from openai import OpenAI
+```python
+import requests
 import json
 
-client = OpenAI(base_url="https://api.inceptionlabs.ai/v1", api_key="INCEPTION_API_KEY")
-
-response_schema = {
-    "type": "object",
-    "properties": {
-        "sentiment": {
-            "type": "string",
-            "enum": ["positive", "negative", "neutral"]
-        },
-        "confidence": {
-            "type": "number",
-            "minimum": 0,
-            "maximum": 1
-        },
-        "key_phrases": {
-            "type": "array",
-            "items": {"type": "string"}
-        }
-    },
-    "required": ["sentiment", "confidence", "key_phrases"]
+url = "https://api.inceptionlabs.ai/v1/chat/completions"
+headers = {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer INCEPTION_API_KEY",
 }
 
-response = client.chat.completions.create(
-    model="mercury-coder",
-    messages=[
-        {"role": "user", "content": "Analyze the sentiment of this text: 'I absolutely love this feature! It works perfectly and saves me so much time.'"}
+response_schema = {
+    "name": "Sentiment",
+    "strict": True,
+    "schema": {
+        "type": "object",
+        "properties": {
+            "sentiment": {
+                "type": "string",
+                "enum": ["positive", "negative", "neutral"]
+            },
+            "confidence": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+            },
+            "key_phrases": {
+                "type": "array",
+                "items": {"type": "string"}
+            }
+        },
+        "required": ["sentiment", "confidence", "key_phrases"]
+    },
+}
+
+data = {
+    "model": "mercury",
+    "messages": [
+        {
+            "role": "user",
+            "content": "Analyze the sentiment of this text: 'I absolutely love this feature! It works perfectly and saves me so much time.'"
+        }
     ],
-    extra_body={"guided_decoding": {"json": response_schema}},
-    max_tokens=50,
-)
+    "response_format": {
+        "type": "json_schema",
+        "json_schema": response_schema
+    },
+    "stream": False,
+    "max_tokens": 512,
+}
 
-result = json.loads(response.choices[0].message.content)
-print(f"Sentiment: {result['sentiment']}")
-print(f"Confidence: {result['confidence']}")
-print(f"Key phrases: {result['key_phrases']}")
+res = requests.post(url, headers=headers, data=json.dumps(data))
+print(res.json())
 ```
-
-
-```python Choice
-from openai import OpenAI
-
-client = OpenAI(base_url="https://api.inceptionlabs.ai/v1", api_key="INCEPTION_API_KEY")
-
-response = client.chat.completions.create(
-    model="mercury-coder",
-    messages=[
-        {"role": "user", "content": "Classify this sentiment: Inception is wonderful!"}
-    ],
-    extra_body={"guided_decoding": {"choice": ["positive", "negative", "neutral"]}},
-    max_tokens=50,
-)
-
-chosen_answer = response.choices[0].message.content
-print(f"Selected answer: {chosen_answer}")
-```
-
-
-```python Regex
-from openai import OpenAI
-import re
-
-client = OpenAI(base_url="https://api.inceptionlabs.ai/v1", api_key="INCEPTION_API_KEY")
-
-response = client.chat.completions.create(
-    model="mercury-coder",
-    messages=[
-        {"role": "user", "content": "Provide a valid date in YYYY-MM-DD format."}
-    ],
-    extra_body={"guided_decoding": {"regex": r"^[0-9]{4}-[0-9]{2}-[0-9]{2}$"}},
-    max_tokens=50,
-)
-
-date = response.choices[0].message.content
-print(f"Generated date: {date}")
-assert re.match(r"^[0-9]{4}-[0-9]{2}-[0-9]{2}$", date)
-```
-
-</CodeGroup>
