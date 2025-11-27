@@ -5,9 +5,7 @@ description: "Inception API supports structured outputs to ensure responses foll
 
 Use JSON schemas to enforce structured data output with specific properties, types, and constraints.
 
-<CodeGroup>
-
-```python JSON
+```python
 import requests
 import json
 
@@ -60,5 +58,3 @@ data = {
 res = requests.post(url, headers=headers, data=json.dumps(data))
 print(res.json())
 ```
-
-</CodeGroup>
